@@ -19,3 +19,10 @@ class UserService:
     
     def delete_user(self, id):
         return self.repository.delete(id)
+    
+    def update_user(self, id, dto: UserCreateDTO):
+        return self.repository.update(id, dto.dict())
+    
+    def patch_user(self, id, dto: UserCreateDTO):
+        data = dto.dict(exclude_unset=True)
+        return self.repository.update(id, data)

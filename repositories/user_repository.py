@@ -1,4 +1,5 @@
 from typing import List
+from xml.parsers.expat import model
 from sqlalchemy.orm import Session
 from entities.user import User
 from interfaces.user_repository_interface import UserRepositoryInterface
@@ -51,22 +52,25 @@ class UserRepository(UserRepositoryInterface):
     
 
 
-    def update(self, user_id: str, user: User) -> User:
+    def update(self, user_id: str, data: dict) -> User:
 
         model = (
-            self.db
-            .query(UserModel)
-            .filter(UserModel.id == user_id)
-            .first()
-        )
+        self.db
+        .query(UserModel)
+        .filter(UserModel.id == user_id)
+        .first()
+    )
 
-        if model:
-            model.name = user.name
-            model.email = user.email
-            model.password = user.password
+        if not model:
+            return None
+
+        for key, value in data.items():
+            setattr(model, key, value)
+
             self.db.commit()
+            self.db.refresh(model)
 
-        return user
+        return User(model.id, model.name, model.email, model.password)
 
 
     def delete(self, user_id: str) -> bool:

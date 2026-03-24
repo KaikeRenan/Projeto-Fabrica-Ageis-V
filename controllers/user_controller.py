@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from services.user_service import UserService
 from repositories.user_repository import UserRepository
-from dtos.user_dto import UserCreateDTO, UserResponseDTO
+from dtos.user_dto import UserCreateDTO, UserResponseDTO, UserUpdateDTO
 from data.database import SessionLocal
 
 router = APIRouter()
@@ -31,3 +31,18 @@ def get_all(service: UserService = Depends(get_service)):
 def delete(id: str, service: UserService = Depends(get_service)):
     service.delete_user(id)
     return {"message": "user deleted"}
+
+
+@router.put("/users/{id}")
+def update(
+    id: str, 
+    user: UserCreateDTO, 
+    service: UserService = Depends(get_service)):
+    return service.update_user(id, user)
+
+@router.patch("/users/{id}")
+def partial_update(
+    id: str,
+    user: UserUpdateDTO, 
+    service: UserService = Depends(get_service)):
+    return service.patch_user(id, user)
