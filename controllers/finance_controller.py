@@ -8,9 +8,9 @@ repo = FinanceRepository()
 service = FinanceService(repo)
 
 @router.get("/get-valuation", response_model=FinanceResponseDTO)
-def get_valuation(url: str = Query(...)):
+def get_valuation(input_data: str = Query(..., description="Cole a URL do Google Finance ou o Ticker (ex: META:NASDAQ)")):
     try:
-        entity = service.execute(url)
+        entity = service.execute(input_data)
         return FinanceResponseDTO(  
             ticker=entity.ticker,
             nome_empresa=entity.nome_empresa, 

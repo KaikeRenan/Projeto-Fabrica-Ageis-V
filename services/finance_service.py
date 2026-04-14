@@ -6,8 +6,11 @@ class FinanceService:
     def __init__(self, repository: IFinanceRepository):
         self.repository = repository
 
-    def execute(self, url: str):
-        ticker = url.split('/')[-1].split('?')[0]
+    def execute(self, input_data: str):
+        if "google.com" in input_data:
+            ticker = input_data.split('/quote/')[-1].split('?')[0]
+        else:
+            ticker = input_data.strip()
         
         data = self.repository.fetch_google_data(ticker)
         
