@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 from controllers.user_controller import router
+from controllers.news_controller import router as news_router
 from controllers.finance_controller import router as finance_router
 
 app = FastAPI()
 
 app.include_router(router)
+app.include_router(news_router)
 app.include_router(finance_router)
 # @app.get("/")
 # async def root():
