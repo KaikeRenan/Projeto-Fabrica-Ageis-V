@@ -1,15 +1,31 @@
-import httpx
+from urllib import response
+
+
+import requests
+#import httpx
 from bs4 import BeautifulSoup
 from interfaces.finance_repository_interface import IFinanceRepository
 
 class FinanceRepository(IFinanceRepository):
     def fetch_google_data(self, ticker: str) -> dict:
-        url = f"https://www.google.com/finance/quote/{ticker}?hl=pt"
+        url = f"https://www.google.com/finance/quote/{ticker}"
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
         
-        with httpx.Client(headers=headers, follow_redirects=True) as client:
-            response = client.get(url)
+        response = requests.get(
+            url,
+            allow_redirects=False
+        )
         
+        print("Status Code:", response.status_code)
+        print("URL:", response.url)
+        print(response.text[:1000])
+
+        print("zzDege:", "zzDege" in response.text)
+        print("slpEwd:", "slpEwd" in response.text)
+        print("roXhBd:", "roXhBd" in response.text)
+
+        
+
         soup = BeautifulSoup(response.text, "html.parser")
         
         nome_tag = soup.find("div", {"class": "zzDege"}) or soup.find("div", {"class": "zzDe30"})
