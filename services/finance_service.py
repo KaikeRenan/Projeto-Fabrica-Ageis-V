@@ -1,6 +1,7 @@
 import re
 from entities.finance import FinanceEntity
 from interfaces.finance_repository_interface import IFinanceRepository
+from interfaces.financeHealth_interface import IFinancialHealthAnalyzer
 
 class FinanceService:
     def __init__(self, repository: IFinanceRepository):
@@ -19,6 +20,7 @@ class FinanceService:
             nome_empresa=data.get("nome_empresa", "Nome não encontrado"), 
             dados={
                 "mercado": data.get("mercado"),
-                "financeiro": data.get("financeiro")
+                "financeiro": data.get("financeiro"),
+                "earnings": data.get("earnings")
             }
         )
