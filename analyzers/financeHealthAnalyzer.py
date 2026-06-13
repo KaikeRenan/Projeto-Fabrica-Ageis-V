@@ -72,7 +72,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if 0 < pl <= 15:
             nota += 1
             auditoria.append(
-                f"[+] P/L saudável ({pl})"
+                f"P/L saudável ({pl})"
             )
 
         # 2. Price to Book
@@ -84,7 +84,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if 0 < pvp <= 2:
             nota += 1
             auditoria.append(
-                f"[+] P/VP atrativo ({pvp})"
+                f"P/VP atrativo ({pvp})"
             )
 
         # 3. Lucro
@@ -96,7 +96,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if lucro > 0:
             nota += 1
             auditoria.append(
-                f"[+] Empresa dá lucro ({lucro} bi)"
+                f"Empresa dá lucro ({lucro} bi)"
             )
 
         # 4. Crescimento do lucro
@@ -108,7 +108,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if var_lucro > 0:
             nota += 1
             auditoria.append(
-                f"[+] Lucro em expansão ({var_lucro}%)"
+                f"Lucro em expansão ({var_lucro}%)"
             )
 
         # 5. Margem líquida
@@ -120,7 +120,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if margem > 10:
             nota += 1
             auditoria.append(
-                f"[+] Margem líquida forte ({margem}%)"
+                f"Margem líquida forte ({margem}%)"
             )
 
         # 6. Crescimento da receita
@@ -132,7 +132,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if var_receita > 0:
             nota += 1
             auditoria.append(
-                f"[+] Receita crescendo ({var_receita}%)"
+                f"Receita crescendo ({var_receita}%)"
             )
 
         # 7. Eficiência operacional
@@ -144,7 +144,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if var_receita > var_custos and var_receita != 0:
             nota += 1
             auditoria.append(
-                "[+] Ganho de eficiência (Receita subiu mais que Custos)"
+                "Ganho de eficiência (Receita subiu mais que Custos)"
             )
 
         # 8. Solvência
@@ -161,7 +161,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if ativos > passivos and ativos != 0:
             nota += 1
             auditoria.append(
-                "[+] Solvente: Ativos cobrem Passivos"
+                "Solvente: Ativos cobrem Passivos"
             )
 
         # 9. ROA
@@ -173,7 +173,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if roa > 0:
             nota += 1
             auditoria.append(
-                f"[+] Retorno sobre ativos positivo ({roa}%)"
+                f"Retorno sobre ativos positivo ({roa}%)"
             )
 
         # 10. Dividend Yield
@@ -184,7 +184,7 @@ class FinancialHealthAnalyzer(IFinancialHealthAnalyzer):
         if dy >= 4:
             nota += 1
             auditoria.append(
-                f"[+] Bom pagamento de dividendos ({dy}%)"
+                f"Bom pagamento de dividendos ({dy}%)"
             )
 
         return {
